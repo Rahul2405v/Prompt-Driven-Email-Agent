@@ -1,0 +1,11 @@
+.chat-widget { position: fixed; right: 18px; bottom: 18px; z-index: 1200; display:flex; flex-direction:column; align-items:flex-end }
+.chat-toggle { display:flex; align-items:center; gap:8px; background:linear-gradient(90deg,#07203a,#0b69ff); color:#fff; padding:10px 14px; border-radius:999px; cursor:pointer; box-shadow:0 10px 30px rgba(2,10,23,0.12) }
+.chat-toggle .chat-icon { font-size:18px }
+.chat-panel { width:360px; max-width:calc(100vw - 40px); background:#fff; border-radius:12px; box-shadow:0 18px 48px rgba(2,10,23,0.16); margin-top:10px; overflow:hidden; display:flex; flex-direction:column }
+.chat-header { padding:10px 12px; background:linear-gradient(90deg,#0f1724,#071028); color:#e6eef8; display:flex; justify-content:space-between; align-items:center }
+.chat-close { background:transparent; color:#e6eef8; border:none; font-size:14px; cursor:pointer }
+.chat-body { padding:10px; max-height:300px; overflow:auto; background:#fbfdff }
+.chat-input { padding:10px; border-top:1px solid #f1f7ff; background:#ffffff }
+.chat-input textarea { width:100%; border:1px solid #eef6ff; border-radius:8px; padding:8px; font-family:inherit }
+.chat-actions { display:flex; justify-content:flex-end; margin-top:8px }
+.chat-actions button { background:#0b69ff; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer }

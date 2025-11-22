@@ -1,0 +1,83 @@
+.prompt-brain-container {
+  width: 70%;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.08);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.prompt-section {
+  margin-bottom: 25px;
+}
+
+.prompt-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.prompt-section textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 15px;
+  font-family: monospace;
+}
+
+.save-btn {
+  background: #2563eb;
+  color: white;
+  padding: 12px 22px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.save-btn:hover {
+  background: #1e4dcc;
+}
+
+/* Enhanced save button styles */
+.save-btn.saving {
+  background: linear-gradient(90deg, #10ca73ff, #06a76b);
+  cursor: default;
+}
+
+.save-btn:disabled {
+  opacity: 0.9;
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-top-color: white;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
