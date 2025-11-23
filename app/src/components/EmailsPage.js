@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { fetchEmails } from '../backendService/promptsService';
 
 import EmailList from './EmailList';
@@ -13,24 +14,58 @@ const EmailsPage = () => {
   const [folder, setFolder] = useState('All');
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [emailData, setEmailData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const headerRef = useRef();
+  const listRef = useRef();
+  const detailRef = useRef();
 
   const categories = useMemo(() => {
     const set = new Set();
     emailData.forEach((e) => set.add(e.category || 'Uncategorized'));
     return Array.from(set.values());
   }, [emailData]);
+
+  // Initial page animations
+  useEffect(() => {
+    if (!isLoading && headerRef.current && listRef.current && detailRef.current) {
+      const tl = gsap.timeline();
+      tl.fromTo(
+        headerRef.current,
+        { y: -30, autoAlpha: 0 },
+        { duration: 0.6, y: 0, autoAlpha: 1, ease: 'power3.out' }
+      )
+      .fromTo(
+        listRef.current,
+        { x: -40, autoAlpha: 0 },
+        { duration: 0.5, x: 0, autoAlpha: 1, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .fromTo(
+        detailRef.current,
+        { x: 40, autoAlpha: 0 },
+        { duration: 0.5, x: 0, autoAlpha: 1, ease: 'power2.out' },
+        '-=0.4'
+      );
+    }
+  }, [isLoading]);
+
   useEffect(() => {
     let mounted = true;
     (async () => {
+      setIsLoading(true);
       try {
         const fetched = await fetchEmails();
         if (mounted && Array.isArray(fetched)) {
- 
           const withCategory = fetched.map((e) => ({ category: e.category || 'Uncategorized', ...e }));
           setEmailData(withCategory);
         }
       } catch (err) {
         console.error('Failed to fetch emails:', err);
+      } finally {
+        if (mounted) {
+          setIsLoading(false);
+        }
       }
     })();
     return () => {
@@ -56,22 +91,39 @@ const EmailsPage = () => {
     });
   }, [sorted, search, folder, categoryFilter]);
 
+  if (isLoading) {
+    return (
+      <div className="emails-loading">
+        <div className="loading-content">
+          <div className="loading-spinner-large"></div>
+          <h2>📧 Loading Your Emails...</h2>
+          <p>Fetching your inbox</p>
+          <div className="loading-shimmer">
+            <div className="shimmer-line"></div>
+            <div className="shimmer-line"></div>
+            <div className="shimmer-line"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="emails-page">
-      <header className="emails-header">
+      <header className="emails-header" ref={headerRef}>
         <div className="emails-header-left">
-          <h1>View Emails</h1>
+          <h1>📧 View Emails</h1>
           <div className="emails-subtitle">All messages — quick preview and animated detail</div>
         </div>
         <div className="emails-controls">
           <input
             className="emails-search"
-            placeholder="Search by subject, sender or content..."
+            placeholder="🔍 Search by subject, sender or content..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
           <select className="emails-category-filter" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-            <option key="All" value="All">All</option>
+            <option key="All" value="All">All Categories</option>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
@@ -79,22 +131,29 @@ const EmailsPage = () => {
         </div>
       </header>
       <div className="emails-container">
-        <aside className="emails-list-pane">
+        <aside className="emails-list-pane" ref={listRef}>
+          <div className="emails-list-header">
+            <h3>Inbox ({filtered.length})</h3>
+          </div>
           <EmailList
             emails={filtered}
             onSelect={(e) => setSelected(e)}
             selectedId={selected ? selected.id : null}
           />
         </aside>
-        <main className="emails-detail-pane">
+        <main className="emails-detail-pane" ref={detailRef}>
           {selected ? (
             <EmailDetail email={selected} id={selected.id} onClose={() => setSelected(null)} />
           ) : (
             <div className="email-empty">
-              <p>Hey Welcome! Select an email to view its details.</p>
-              <p>Customize your Email Agent behavior in the "Prompt Brain" tab.</p>
-              <Link to="/prompts">Go to Prompt Brain</Link>
-              <RagChat />
+              <div className="empty-icon">📬</div>
+              <h2>Welcome to Your Inbox!</h2>
+              <p>Select an email from the list to view its details and interact with it.</p>
+              <p className="empty-hint">Customize your Email Agent behavior in the "Prompt Brain" tab.</p>
+              <Link to="/prompts" className="empty-link">Go to Prompt Brain →</Link>
+              <div className="rag-chat-container">
+                <RagChat />
+              </div>
             </div>
           )}
         </main>

@@ -14,10 +14,41 @@ const EmailDetail = ({ email, onClose,id }) => {
   // GSAP enter animation
   useEffect(() => {
     if (ref.current) {
-      gsap.fromTo(
+      const tl = gsap.timeline();
+      tl.fromTo(
         ref.current,
-        { y: 10, autoAlpha: 0 },
-        { duration: 0.36, y: 0, autoAlpha: 1, ease: 'power2.out' }
+        { y: 30, autoAlpha: 0 },
+        { duration: 0.5, y: 0, autoAlpha: 1, ease: 'power3.out' }
+      )
+      .fromTo(
+        '.avatar-large',
+        { scale: 0.8, autoAlpha: 0 },
+        { duration: 0.4, scale: 1, autoAlpha: 1, ease: 'back.out(1.7)' },
+        '-=0.3'
+      )
+      .fromTo(
+        '.email-detail-subject',
+        { x: -20, autoAlpha: 0 },
+        { duration: 0.4, x: 0, autoAlpha: 1, ease: 'power2.out' },
+        '-=0.2'
+      )
+      .fromTo(
+        '.email-detail-meta',
+        { x: -20, autoAlpha: 0 },
+        { duration: 0.4, x: 0, autoAlpha: 1, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .fromTo(
+        '.email-actions',
+        { x: 20, autoAlpha: 0 },
+        { duration: 0.4, x: 0, autoAlpha: 1, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .fromTo(
+        '.email-detail-body',
+        { y: 20, autoAlpha: 0 },
+        { duration: 0.4, y: 0, autoAlpha: 1, ease: 'power2.out' },
+        '-=0.2'
       );
     }
   }, [email]);
@@ -40,6 +71,29 @@ const EmailDetail = ({ email, onClose,id }) => {
     setPromptText('');
     setShowReply(false);
   }, [email]);
+
+  // Animate action items
+  useEffect(() => {
+    const actionItems = document.querySelectorAll('.email-detail-actions li');
+    if (actionItems.length > 0) {
+      gsap.fromTo(
+        actionItems,
+        { x: -20, autoAlpha: 0 },
+        { duration: 0.4, x: 0, autoAlpha: 1, ease: 'power2.out', stagger: 0.1 }
+      );
+    }
+  }, [email]);
+
+  // Animate reply modal
+  useEffect(() => {
+    if (showReply) {
+      gsap.fromTo(
+        '.reply-modal',
+        { scale: 0.9, autoAlpha: 0 },
+        { duration: 0.3, scale: 1, autoAlpha: 1, ease: 'back.out(1.7)' }
+      );
+    }
+  }, [showReply]);
 
   if (!email) {
     return (

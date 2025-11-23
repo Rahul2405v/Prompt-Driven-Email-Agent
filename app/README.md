@@ -1,3 +1,63 @@
+# Frontend — `app/`
+
+Overview
+-
+This folder contains the React frontend for the Prompt-Driven Email Agent. It provides the UI for viewing mock emails, interacting with the prompt-based assistant, and using a RAG-powered chat widget.
+
+Quick start
+-
+- Install dependencies: `npm install`
+- Start dev server: `npm start`
+
+Structure and file responsibilities
+-
+- `package.json`: npm scripts and frontend dependencies.
+- `README.md`: (this file) documentation for the frontend.
+
+Public folder
+-
+- `public/index.html`: Root HTML page rendered by React.
+- `public/manifest.json`: PWA manifest metadata.
+- `public/robots.txt`: Web crawler instructions.
+
+Src folder (key files)
+-
+- `src/index.js`: React entry point — mounts the app.
+- `src/App.js`: Main top-level React component and router/structure.
+- `src/App.css`: Global styles for the app.
+- `src/reportWebVitals.js`: Web vitals helper (create-react-app default).
+- `src/setupTests.js`: Test setup for Jest/React Testing Library.
+- `src/App.test.js`: Basic frontend tests.
+
+Backend services (frontend wrappers)
+-
+- `src/backendService/promptsService.js`: Client helper to call the backend prompts endpoints (send prompt templates, receive generated drafts/replies).
+- `src/backendService/rag_service.js`: Client helper for RAG endpoints (sending user messages and retrieving RAG responses).
+
+Components (in `src/components/`)
+-
+- `ChatWidget.js`: UI wrapper for the chat widget used across the app.
+- `EmailList.js`: Page component rendering a list of emails.
+- `EmailListItem.js`: Single email row displayed in a list.
+- `EmailsPage.js`: Full page combining list and details, main email UX.
+- `EmailDetail.js`: Shows full email content and metadata.
+- `MessageItem.js`: Single chat message bubble used in chat views.
+- `ProcessEmail.js`: Component responsible for triggering processing workflows (e.g., generate reply, categorize, summarize).
+- `promptBrain.js`: UI and helpers for composing/managing prompt templates.
+- `RagChat.js`: RAG-based chat component that connects to the RAG backend.
+
+CSS (in `src/css/`)
+-
+- `ChatWidget.css`, `EmailList.css`, `emailDetails.css`, `promptBrain.css`, `RagChat.css`: Component-specific styles.
+
+Notes
+-
+- The frontend expects the backend to expose REST endpoints for prompts/RAG. Update the service base URLs in `src/backendService/*` if your backend runs on a different host/port.
+- If you want to build for production, run `npm run build` and deploy the contents of `build/` to your host.
+
+Contact
+-
+If you need updates or additional documentation (API contract, env vars), I can add example requests and Postman/cURL snippets.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

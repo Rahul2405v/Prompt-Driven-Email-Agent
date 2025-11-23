@@ -28,7 +28,12 @@ export default function EmailListItem({ email, onSelect, selected }) {
   const recent = (Date.now() - new Date(email.timestamp).getTime()) < 1000 * 60 * 60 * 24;
 
   return (
-    <div ref={ref} className={`email-list-item${selected ? ' selected' : ''}`} onClick={() => onSelect(email)}>
+    <div 
+      ref={ref} 
+      className={`email-list-item${selected ? ' selected' : ''}`} 
+      onClick={() => onSelect(email)}
+      data-email-id={email.id}
+    >
       <div className="email-left">
         <div className="avatar">{avatarFor(email.sender_name)}</div>
       </div>
