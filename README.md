@@ -1,4 +1,7 @@
-<img width="1919" height="901" alt="image" src="https://github.com/user-attachments/assets/f6dac6b4-a81f-43b1-b6ba-d5b822ddc8d8" /># Prompt-Driven AI Email Productivity Agent
+<img width="1919" height="901" alt="image" src="https://github.com/user-attachments/assets/f6dac6b4-a81f-43b1-b6ba-d5b822ddc8d8" />
+
+---
+# Prompt-Driven AI Email Productivity Agent
 
 A full‑stack AI‑powered Email Productivity Agent capable of categorizing emails, extracting action items, drafting replies, and allowing natural chat‑based inbox interaction — fully driven by user‑defined prompts.
 
