@@ -1,4 +1,4 @@
-# Prompt-Driven AI Email Productivity Agent
+<img width="1919" height="901" alt="image" src="https://github.com/user-attachments/assets/f6dac6b4-a81f-43b1-b6ba-d5b822ddc8d8" /># Prompt-Driven AI Email Productivity Agent
 
 A full‑stack AI‑powered Email Productivity Agent capable of categorizing emails, extracting action items, drafting replies, and allowing natural chat‑based inbox interaction — fully driven by user‑defined prompts.
 
@@ -25,6 +25,11 @@ This system is built using **React, FastAPI, LangChain, Groq, MongoDB Atlas Vect
 * 🔹 **Search & filter inbox** by sender, subject, content, and category
 * 🔹 **Smooth GSAP page animations** for modern UX
 * 🔹 **Never sends emails automatically** — all replies are saved as drafts
+
+---
+---
+### Architecture
+<img width="2005" height="1333" alt="diagram-export-11-24-2025-4_50_45-PM" src="https://github.com/user-attachments/assets/1910f12e-bc4b-4eb6-88bb-f4f75236b713" />
 
 ---
 
