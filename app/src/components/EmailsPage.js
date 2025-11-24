@@ -7,6 +7,7 @@ import EmailDetail from './EmailDetail';
 import { Link } from "react-router-dom";
 import ChatWidget from './ChatWidget';
 import RagChat from './RagChat';
+import AddEmail from './AddEmail';
 
 const EmailsPage = () => {
   const [selected, setSelected] = useState(null);
@@ -50,28 +51,31 @@ const EmailsPage = () => {
     }
   }, [isLoading]);
 
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      setIsLoading(true);
-      try {
-        const fetched = await fetchEmails();
-        if (mounted && Array.isArray(fetched)) {
-          const withCategory = fetched.map((e) => ({ category: e.category || 'Uncategorized', ...e }));
-          setEmailData(withCategory);
-        }
-      } catch (err) {
-        console.error('Failed to fetch emails:', err);
-      } finally {
-        if (mounted) {
-          setIsLoading(false);
-        }
+  const loadEmails = async () => {
+    setIsLoading(true);
+    try {
+      const fetched = await fetchEmails();
+      if (Array.isArray(fetched)) {
+        const withCategory = fetched.map((e) => ({ category: e.category || 'Uncategorized', ...e }));
+        setEmailData(withCategory);
       }
-    })();
-    return () => {
-      mounted = false;
-    };
+    } catch (err) {
+      console.error('Failed to fetch emails:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadEmails();
   }, []);
+
+  const handleEmailAdded = (newEmail) => {
+    // Add the new email to the list
+    setEmailData(prev => [{ category: newEmail.category || 'Uncategorized', ...newEmail }, ...prev]);
+    // Optionally select the new email
+    setSelected(newEmail);
+  };
 
   const sorted = useMemo(() => {
     return [...emailData].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -116,6 +120,7 @@ const EmailsPage = () => {
           <div className="emails-subtitle">All messages — quick preview and animated detail</div>
         </div>
         <div className="emails-controls">
+          <AddEmail onEmailAdded={handleEmailAdded} />
           <input
             className="emails-search"
             placeholder="🔍 Search by subject, sender or content..."

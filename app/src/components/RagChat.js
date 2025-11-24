@@ -82,6 +82,7 @@ export default function RagChat({ initialPrompt = 'Summarize recent emails for m
     try {
       const resp = await replyToEmail(prompt, k);
       // resp expected shape: { answer, chunks, extracted_ids }
+      console.log('RAG response:', resp);
       const assistantText = resp.answer || JSON.stringify(resp);
       const meta = { extracted_ids: resp.extracted_ids || [] };
       const assistantMsg = { role: 'assistant', text: assistantText, meta };

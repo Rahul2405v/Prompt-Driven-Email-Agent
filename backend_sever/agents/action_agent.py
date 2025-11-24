@@ -18,6 +18,7 @@ action_item_prompt_template = PromptTemplate.from_template("""
 Email:
 Subject: {subject}
 Body: {body}
+                Extract the task if deadline is present or not
 """)
 
 def run_action_extraction(subject: str, body: str, action_prompt: str):
