@@ -1,251 +1,168 @@
-# 📧 Prompt-Driven Email Agent
+# Prompt-Driven AI Email Productivity Agent
 
-Supercharge your inbox with AI — Categorization, Action-Item Detection, Deadline Extraction, and Auto-Drafted Replies.
+A full‑stack AI‑powered Email Productivity Agent capable of categorizing emails, extracting action items, drafting replies, and allowing natural chat‑based inbox interaction — fully driven by user‑defined prompts.
 
----
-
-## 🚀 What is this project?
-
-The **Prompt-Driven Email Agent** intelligently processes emails using LLM-powered agents.
-It reads incoming emails, **understands the intent**, detects **actions and deadlines**, and drafts a **polished reply** — all driven by customizable prompts.
-
-Core features:
-
-| Feature                   | Description                                        |
-| ------------------------- | -------------------------------------------------- |
-| 🧠 Email Categorization   | Action Required / Meeting / Informational / Other  |
-| ✔ Action-Item Extraction  | Converts email body into actionable task bullets   |
-| ⏳ Deadline Identification | Extracts dates, times & natural-language deadlines |
-| ✨ Reply Drafting          | Auto-drafted response based on email context       |
-| 📂 Mock Inbox             | Built-in dataset for quick testing                 |
-| 🔍 RAG                    | Ask questions using Retrieval-Augmented Generation |
+This system is built using **React, FastAPI, LangChain, Groq, MongoDB Atlas Vector Search, FastEmbed, and GSAP animations** and deployed on **Vercel**.
 
 ---
 
-## 🔧 Tech Stack
+## 🚀 Live Deployment
 
-* **Frontend:** React
-* **Backend:** Flask / FastAPI
-* **LLM:** OpenAI / Groq
-* **RAG:** Vector search + embeddings
+| Component         | URL                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------- |
+| Frontend (React)  | [https://prompt-driven-email-agent.vercel.app/](https://prompt-driven-email-agent.vercel.app/) |
+| Backend (FastAPI) | [https://email-agent-lemon.vercel.app/](https://email-agent-lemon.vercel.app/)                 |
 
 ---
 
-## 📂 Repository Structure
+## 📌 Features
+
+* 🔹 Automatic **email categorization** using LLM agents
+* 🔹 **Action‑item extraction** in structured JSON format
+* 🔹 **Reply draft generation** using customizable auto‑reply prompts
+* 🔹 **Chat‑style inbox assistant** powered by RAG
+* 🔹 **Prompt Brain panel** — modify agent behaviour without changing code
+* 🔹 **Search & filter inbox** by sender, subject, content, and category
+* 🔹 **Smooth GSAP page animations** for modern UX
+* 🔹 **Never sends emails automatically** — all replies are saved as drafts
+
+---
+
+## 🧠 Tech Stack
+
+### Frontend
+
+* React
+* GSAP Animations
+* Tailored CSS UI components
+
+### Backend
+
+* FastAPI
+* LangChain (Agentic framework)
+* Groq LLM integration
+
+### Retrieval Augmented Generation (RAG)
+
+* FastEmbed (vector embedding)
+* MongoDB Atlas Vector Search (Cosine similarity)
+* Chunk‑based email indexing system
+
+### Deployment
+
+* Vercel (both frontend + backend)
+
+---
+
+## 📂 Folder Structure Overview
 
 ```
-Prompt-Driven-Email-Agent/
+project_root/
 │
-├── app/                     # React UI
-│── backend_sever/           # Backend API + Agents + RAG
-└── README.md                # (this file)
+├── agents/                  # LangChain agent logic
+│   ├── action_agent.py
+│   ├── categorization_agent.py
+│   ├── reply_draft.py
+│   ├── agent_helper.py
+│   └── parllel_runner.py
+│
+├── rag/                     # Retrieval‑Augmented Generation stack
+│   ├── chunking.py
+│   ├── config.py
+│   ├── db_client.py
+│   ├── db.py
+│   ├── embedding.py
+│   ├── extract_idx.py
+│   ├── groq_llm.py
+│   ├── indexer.py
+│   ├── rag_routes.py
+│   └── vector_search.py
+│
+├── models/                  # Pydantic models
+│   ├── EmailPayload.py
+│   ├── GenerateReplyRequest.py
+│   ├── Query.py
+│   └── CustomAPIEmbedding.py
+│
+└── frontend/                # React UI (deployed)
 ```
 
 ---
 
-# 🛠️ Setup Instructions
+## 🛠️ Setup Instructions
 
-### 📌 Clone the repo
+### Backend Setup
 
 ```bash
-git clone https://github.com/Rahul2405v/Prompt-Driven-Email-Agent.git
-cd Prompt-Driven-Email-Agent
-```
-
----
-
-## ⚙ Backend Setup — `backend_sever/`
-
-### 1️⃣ Activate the virtual environment
-
-```powershell
-.\backend_sever\backendVenv\Scripts\Activate.ps1
-```
-
-OR create a fresh one:
-
-```powershell
-python -m venv backendVenv
-.\backendVenv\Scripts\Activate.ps1
+git clone <repo-url>
+cd backend
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Create a `.env` file (important)
+Create `.env` file with:
 
 ```
-OPENAI_API_KEY=your_key_here
-# or GROQ_API_KEY=your_key_here
-VECTOR_DB_URL=optional_for_RAG
+MODEL_NAME="llama-3.3-70b"
+GROQ_API_KEY="gsk_gJrT9U..."
+MONGODB_URI="mongodb+srv://..."
+MONGODB_DB="rag_db"
+MONGODB_COLLECTION="emails"
+HUGGINGFACEHUB_API_TOKEN="..."
+
 ```
 
-### 3️⃣ Start the server
-
-```powershell
+Start backend:
+In windows
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 python app.py
 ```
 
-Server runs at → `http://localhost:8000`
-
----
-
-## 🖥 Frontend Setup — `app/`
+### Frontend Setup
 
 ```bash
-cd app
+cd frontend
 npm install
 npm start
 ```
 
-Frontend runs at → `http://localhost:3000`
+---
+
+## ▶️ How to Run the System
+
+1. Start the backend server (FastAPI)
+2. Start the frontend (React)
+3. Load inbox from UI
+4. Customize prompts in **Prompt Brain** tab
+5. Process inbox → automatic categorization & task extraction
+6. Use **Email Agent chat** to:
+
+   * Summarize emails
+   * Extract responsibilities
+   * Generate reply drafts
+7. Drafts can be saved — system never auto‑sends
 
 ---
 
-# 🔄 Connecting UI ↔ Backend
+## 🧩 Prompt Brain (Agent Configuration)
 
-If the backend runs on a different port, update:
+Users can edit built‑in prompts to modify agent behaviour:
 
-```
-app/src/backendService/promptsService.js
-app/src/backendService/rag_service.js
-```
-
-Example:
-
-```js
-export const API_BASE_URL = "http://localhost:8000";
-```
+* Categorization Prompt
+* Action‑Item Extraction Prompt
+* Auto‑Reply Drafting Prompt
+* Summarization prompt
+Changing prompts immediately alters the agent’s output — no code changes required.
 
 ---
 
-# 📥 Load the Mock Inbox
+## 🔐 Safety & Reliability
 
-✔ The mock inbox dataset is located at:
-
-```
-backend_sever/mock_emails.json
-```
-
-Ways to load it:
-
-| Method    | How                                     |
-| --------- | --------------------------------------- |
-| UI button | Click **“Load Mock Inbox”**             |
-| API       | `GET http://localhost:8000/emails/mock` |
-
----
-
-# ✍️ Configure Prompts
-
-All prompt templates are stored in:
-
-```
-backend_sever/prompts.json
-```
-
-You can modify:
-
-| Prompt                | Purpose                                   |
-| --------------------- | ----------------------------------------- |
-| categorization_prompt | Controls how the AI classifies emails     |
-| action_prompt         | Controls how action items are extracted   |
-| deadline_prompt       | Controls deadline extraction behavior     |
-| reply_prompt          | Controls tone & structure of auto replies |
-
-> No code updates needed — you can tune the prompts freely.
-
----
-
-# ⚡ Usage Examples
-
-### 1️⃣ Analyze a single email
-
-```bash
-curl -X POST http://localhost:8000/analyze-email \
-  -H "Content-Type: application/json" \
-  -d '{
-    "id": "101",
-    "subject": "Submit weekly report by Friday",
-    "body": "Hi Rahul, kindly submit the weekly report before Friday evening.",
-    "from": "manager@company.com"
-  }'
-```
-
-📌 Example Output
-
-```json
-{
-  "id": "101",
-  "category": "ACTION_REQUIRED",
-  "actions": ["Submit the weekly report"],
-  "deadlines": [
-    {
-      "date": "2025-11-22",
-      "time": "18:00",
-      "timezone": "Asia/Kolkata"
-    }
-  ],
-  "draft_reply": "Hi, thanks for the update. I will submit the weekly report by Friday evening."
-}
-```
-
----
-
-# 🔁 Processing Workflow
-
-```
-Incoming Email
-      ↓
-Preprocessing
-      ↓
-Three parallel LLM agents
-  ├ Categorization Agent
-  ├ Action-Item Agent
-  └ Deadline Agent
-      ↓
-Result Aggregation
-      ↓
-Reply Draft Agent
-      ↓
-UI & API Response
-```
-
----
-
-# 🌐 RAG — Retrieval-Augmented Querying
-
-You can search previous messages/documents using the chat widget or via API:
-
-```bash
-curl -X POST http://localhost:8000/rag/query \
-  -d '{"query": "What is the leave policy update?"}'
-```
-
----
-
-# 🤝 Contributing
-
-Pull requests are welcome.
-Improvements / ideas? Open an issue!
-
----
-
-# 🧩 Roadmap
-
-* [ ] Export tasks to Calendar / Slack / Teams
-* [ ] Batch summarization for multiple emails
-* [ ] Personal style learning for reply drafting
-
----
-
-# ⭐ Support the Project
-
-If you like this project, **star the repository** — it encourages further development 🤝
-
----
-
-### 👨‍💻 Author
-
-**Rahul V** — AI • Backend • React
-Open to collaboration and feature suggestions.
+* All LLM actions default to **draft mode only**
+* Backend validates structured JSON output
+* Fail‑safes for LLM errors & malformed responses
+* Email content is never sent to external APIs without user consent
 
 ---
