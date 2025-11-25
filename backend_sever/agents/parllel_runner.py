@@ -26,7 +26,7 @@ def run_parallel_processing(subject: str, body: str, prompts: dict):
         "subject": subject,
         "body": body,
         "categorization_prompt": prompts["categorization"],
-        "action_item_prompt": prompts["action_item"]
+        "fields_requested": prompts["action_item"]
     }
 
     full_sequence = RunnableSequence(

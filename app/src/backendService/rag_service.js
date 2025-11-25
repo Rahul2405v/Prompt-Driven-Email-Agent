@@ -1,4 +1,4 @@
-const BASE_URL =  "https://email-agent-lemon.vercel.app";
+const BASE_URL =  "http://127.0.0.1:8000";
 
 export const replyToEmail = async (prompt_q, k_n) => {
   const res = await fetch(`${BASE_URL}/ask`, {

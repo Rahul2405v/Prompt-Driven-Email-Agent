@@ -343,45 +343,86 @@
   box-shadow: 0 4px 12px rgba(234, 179, 8, 0.1);
 }
 .email-detail-actions h3 { 
-  margin:0 0 12px 0; 
+  margin:0 0 16px 0; 
   font-size:18px; 
   color:#713f12;
   font-weight: 700;
 }
-.action-deadline {
-  background: #fff7ed;
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  border-left: 3px solid #fb923c;
-  font-size: 14px;
-  color: #9a3412;
+
+.action-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.email-detail-actions ul { 
-  margin:0; 
-  padding:0;
+
+.action-field {
+  background: white;
+  padding: 14px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-left: 3px solid #eab308;
+}
+
+.action-field .field-label {
+  display: block;
+  font-weight: 700;
+  color: #854d0e;
+  font-size: 13px;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.action-field .field-value {
+  color: #713f12;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.action-field .field-value span {
+  display: block;
+}
+
+.action-field .field-value pre {
+  background: #fef9f3;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  overflow-x: auto;
+  margin: 0;
+  border: 1px solid #fde68a;
+}
+
+.action-field .field-value ul {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
-.email-detail-actions li { 
-  margin:10px 0; 
-  color:#713f12;
-  padding: 10px 12px;
-  padding-left: 36px;
-  background: white;
-  border-radius: 8px;
+
+.action-field .field-value li {
+  margin: 6px 0;
+  padding: 8px 12px;
+  padding-left: 32px;
+  background: #fef9f3;
+  border-radius: 6px;
   position: relative;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: #713f12;
+  border: 1px solid #fde68a;
 }
-.email-detail-actions li::before {
+
+.action-field .field-value li::before {
   content: '✓';
   position: absolute;
-  left: 12px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   color: #16a34a;
   font-weight: bold;
   font-size: 16px;
 }
-.email-detail-actions li:last-child {
+
+.action-field .field-value li:last-child {
   margin-bottom: 0;
 }
 

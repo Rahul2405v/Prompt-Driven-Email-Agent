@@ -38,9 +38,12 @@ def get_prompts():
 
 @app.post("/prompts")
 def update_prompts(data: dict):
-    db_save_prompts(data)
-    process_all_emails()
-    return {"status": "success"}
+    try:
+        db_save_prompts(data)
+        result = process_all_emails()
+        return {"status": "success", "processing_result": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update prompts: {str(e)}")
 
 
 # ==================== EMAIL ROUTES ====================

@@ -103,15 +103,21 @@ const EmailDetail = ({ email, onClose,id }) => {
     );
   }
 
-  // normalize action tasks to array and capture deadline
-  let actionTasks = null;
-  let actionDeadline = null;
-  if (email.actions) {
-    const t = email.actions.task;
-    actionDeadline = email.actions.deadline || null;
-    if (Array.isArray(t)) actionTasks = t;
-    else if (typeof t === 'string' && t.trim()) actionTasks = [t.trim()];
-  }
+  // Extract all action fields dynamically from email.actions object
+  const getActionFields = () => {
+    if (!email.actions || typeof email.actions !== 'object') return null;
+    
+    const fields = {};
+    Object.entries(email.actions).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        fields[key] = value;
+      }
+    });
+    
+    return Object.keys(fields).length > 0 ? fields : null;
+  };
+
+  const actionFields = getActionFields();
 
 
   const persistSavedReply = (replyObj) => {
@@ -232,17 +238,29 @@ const EmailDetail = ({ email, onClose,id }) => {
         ))}
       </div>
 
-      {actionTasks && actionTasks.length > 0 && (
+      {actionFields && (
         <div className="email-detail-actions">
-          <h3>Action Items:</h3>
-          {actionDeadline && (
-            <div className="action-deadline"><strong>Deadline:</strong> {actionDeadline}</div>
-          )}
-          <ul>
-            {actionTasks.map((item, i) => (
-              <li key={i}>{item}</li>
+          <h3>📋 Action Items:</h3>
+          <div className="action-fields">
+            {Object.entries(actionFields).map(([key, value]) => (
+              <div key={key} className="action-field">
+                <span className="field-label">{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}:</span>
+                <div className="field-value">
+                  {Array.isArray(value) ? (
+                    <ul>
+                      {value.map((item, i) => (
+                        <li key={i}>{typeof item === 'object' ? JSON.stringify(item) : String(item)}</li>
+                      ))}
+                    </ul>
+                  ) : typeof value === 'object' ? (
+                    <pre>{JSON.stringify(value, null, 2)}</pre>
+                  ) : (
+                    <span>{String(value)}</span>
+                  )}
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
         {/* Chat moved to floating widget (bottom-right) to avoid disrupting layout */}
