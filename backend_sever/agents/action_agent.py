@@ -32,7 +32,7 @@ Body: {body}
 
 def run_action_extraction(subject: str, body: str, action_prompt: str):
     prompt = action_item_prompt_template.format(
-        action_item_prompt=action_prompt,
+        fields_requested=action_prompt,
         subject=subject,
         body=body
     )
@@ -44,4 +44,5 @@ def run_action_extraction(subject: str, body: str, action_prompt: str):
         return json.loads(text)
     except:
         return []
+
 
