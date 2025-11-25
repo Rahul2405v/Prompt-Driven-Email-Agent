@@ -44,3 +44,5 @@ def run_action_extraction(subject: str, body: str, action_prompt: str):
         return json.loads(text)
     except:
         return []
+
+

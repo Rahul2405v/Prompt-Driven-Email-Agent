@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "https://ai-email-enhancer.vercel.app";
 
 export const getPrompts = async () => {
   const res = await fetch(`${BASE_URL}/prompts`);
@@ -35,4 +35,5 @@ export const replyToEmail = async (emailId, replyContent) => {
     body: JSON.stringify({ id: emailId, prompt: replyContent })
   });
   return await res.json();
+
 }

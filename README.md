@@ -14,7 +14,7 @@ This system is built using **React, FastAPI, LangChain, Groq, MongoDB Atlas Vect
 | Component         | URL                                                                                            |
 | ----------------- | ---------------------------------------------------------------------------------------------- |
 | Frontend (React)  | [https://prompt-driven-email-agent.vercel.app/](https://prompt-driven-email-agent.vercel.app/) |
-| Backend (FastAPI) | [https://email-agent-lemon.vercel.app/](https://email-agent-lemon.vercel.app/)                 |
+| Backend (FastAPI) | [https://ai-email-enhancer.vercel.app/](https://ai-email-enhancer.vercel.app/)                 |
 
 ---
 

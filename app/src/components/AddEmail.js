@@ -43,7 +43,7 @@ const AddEmail = ({ onEmailAdded }) => {
         folder: formData.folder
       };
 
-      const response = await fetch('http://127.0.0.1:8000/add-email', {
+      const response = await fetch('https://ai-email-enhancer.vercel.app/add-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -252,3 +252,4 @@ Sarah`,
 };
 
 export default AddEmail;
+
